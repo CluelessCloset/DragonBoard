@@ -30,4 +30,3 @@ clean:
 	@- $(RM) $(program_OBJS)
 	@	 $(RM) $(program_OBJS_TESTS)
 
-distclean: clean

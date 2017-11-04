@@ -6,7 +6,7 @@
 #define DATA_LEN 252
 
 typedef struct {
-  int type,
+  int packet_type;
   char data[DATA_LEN];
 } packet;
 

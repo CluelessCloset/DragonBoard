@@ -1,6 +1,8 @@
-
 #include "net.h"
 #include "dispatcher.h"
+
+#include <stdio.h>
+#include <string.h>
 #include <semaphore.h>
 #include <pthread.h>
 #include <stdbool.h>
@@ -43,7 +45,7 @@ void push_job(packet* p)
   //wait for the green light
   sem_wait(&empty_spots);
 
-  pthread_mutex_lock(job_mutex);
+  pthread_mutex_lock(&job_mutex);
 
   //copy the packet into the next empty slot in the job queue
   memcpy(&job_buffer[empty_index], p, sizeof(packet));
@@ -52,10 +54,10 @@ void push_job(packet* p)
   if(empty_index == BUFFER_LEN)
     empty_index = 0;
   
-  pthread_mutex_unlock(job_mutex);
+  pthread_mutex_unlock(&job_mutex);
 
   //Increment number of full spots.
-  sem_post(full_spots);
+  sem_post(&full_spots);
 }
 
 /*
@@ -70,12 +72,14 @@ packet pull_job()
   packet p = job_buffer[full_index];
   full_index++;
   if(full_index == BUFFER_LEN)
-    full_spots = 0;
+    full_index = 0;
 
   pthread_mutex_unlock(&job_mutex);
 
   //increment number of empty spots
-  sem_post(empty_spots);
+  sem_post(&empty_spots);
+
+  return p;
 } 
 /*
  * Main loop for the job dispatcher
@@ -90,5 +94,12 @@ void * dispatch_loop(void * x)
     job = pull_job();
 
     //process the job
+    switch(job.packet_type)
+    {
+      default: //todo, cases
+        break;
+    }
   }
+
+  return (void *) 0;
 }
