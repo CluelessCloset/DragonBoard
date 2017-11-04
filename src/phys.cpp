@@ -9,7 +9,7 @@ static uint8_t rx_tx_buffer[I2C_BUFFER_MAX];
 
 
 //local functions
-void phys_i2c_write(uint8_t address, uint8_t data);
+mraa_result_t phys_i2c_write(uint8_t address, uint8_t data);
 uint8_t phys_i2c_read_1(uint8_t address);
 uint16_t phys_i2c_read_2(uint8_t address);
 
@@ -34,7 +34,7 @@ void phys_write_led(int value)
 
 //app-level functions
 //probe the address for its force value and return it
-mraa_result_t phys_read_force(uint8_t address)
+uint16_t phys_read_force(uint8_t address)
 {
   phys_i2c_write(address, ADC_READ);
   return phys_i2c_read_2(address);
