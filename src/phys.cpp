@@ -34,7 +34,7 @@ void phys_write_led(int value)
 
 //app-level functions
 //probe the address for its force value and return it
-uint16_t phys_read_force(uint8_t address)
+uint16_t phys_i2c_read_force(uint8_t address)
 {
   phys_i2c_write(address, ADC_READ);
   return phys_i2c_read_2(address);

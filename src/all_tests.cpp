@@ -69,7 +69,7 @@ void test_phys()
   sleep(1);
   phys_i2c_write_led(TEST_PHYS_ADDR, 0);
   sleep(1);
-  uint16_t adc = phys_i2c_read_force(address);
+  uint16_t adc = phys_i2c_read_force(TEST_PHYS_ADDR);
   printf("Adc: %f\n", adc);
   assert(adc != ERR);
 
