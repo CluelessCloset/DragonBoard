@@ -11,7 +11,7 @@ void phys_init()
   mraa_gpio_dir(led_gpio, MRAA_GPIO_OUT);
 }
 
-void phys_write_led(int pin)
+void phys_write_led(int value)
 {
   mraa_gpio_write(led_gpio, value);
 }
