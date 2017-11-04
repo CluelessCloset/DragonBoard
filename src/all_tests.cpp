@@ -9,7 +9,8 @@
 #include <stdint.h>
 #include <unistd.h>
 
-#define TEST_PHYS_ADDR  8
+#define TEST_PHYS_ADDR  0
+#define TEST_BAD_ADDR   7
 
 void run_all_tests()
 {
@@ -57,23 +58,30 @@ void test_dispatcher()
 void test_phys()
 {
   phys_init();
-  phys_write_led(HIGH);
+  phys_led_write(HIGH);
   sleep(1);
-  phys_write_led(LOW);
+  phys_led_write(LOW);
   printf("LED should have blinked\n");
-
-  //now test the I2C interface.
-  printf("Make sure Arduino is started\n");
-  assert(phys_i2c_ping(TEST_PHYS_ADDR) == true);
-  phys_i2c_write_led(TEST_PHYS_ADDR, 1);
   sleep(1);
-  phys_i2c_write_led(TEST_PHYS_ADDR, 0);
-  sleep(1);
-  uint16_t adc = phys_i2c_read_force(TEST_PHYS_ADDR);
-  printf("Adc: %f\n", adc);
-  assert(adc != ERR);
 
-  printf("Phys interfaces passed tests");
+  //now test the bus interface
+  //ping
+  bool result;
+  result = phys_bus_ping(TEST_PHYS_ADDR);
+  assert(result == true);
+  result = phys_bus_ping(TEST_BAD_ADDR);
+  assert(result == false);
+
+  result = phys_bus_led_on(TEST_PHYS_ADDR);
+  assert(result == true);
+  sleep(1);
+  result = phys_bus_led_off(TEST_PHYS_ADDR);
+  assert(result == true);
+  sleep(1);
+  printf("Arduino Light should have blinked\n");
+
+  result = phys_bus_adc_read(uint8_t address);
+  printf("Here's whether there's clohtes or not: %d", (int) result);
 
 }
 

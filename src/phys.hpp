@@ -4,11 +4,24 @@
 
 #include <stdint.h>
 
-#define LED_PIN         23
+//pins 
+#define PIN_CS0         23
+#define PIN_CS1         24
+#define PIN_CS2         25
+
+#define PIN_CMD0        26
+#define PIN_CMD1        27
+
+#define PIN_PRESENT     31 //pin 28 is reserved.
+#define PIN_ACK         29
+
+#define PIN_CONTROL     30
+
+#define PIN_LED         32
+
+
 #define HIGH            1
 #define LOW             0
-#define I2C_BUFFER_MAX  10
-#define I2C_BUS         0 
 
 
 //function constants
@@ -17,17 +30,14 @@
 #define LED_OFF         0x02
 #define ADC_READ        0x03
 
-#define ACK             0xEE
-#define ERR             0xAA
-
 void phys_init();
 
-void phys_write_led(int value);
+void phys_led_write(int value);
 
-
-uint16_t phys_i2c_read_force(uint8_t address);
-void phys_i2c_write_led(uint8_t address, int value);
-bool phys_i2c_ping(uint8_t address);
+bool phys_bus_ping(uint8_t address);
+bool phys_bus_led_on(uint8_t address);
+bool phys_bus_led_off(uint8_t address);
+bool phys_bus_adc_read(uint8_t address);
 
 
 #endif
