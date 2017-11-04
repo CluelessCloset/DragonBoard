@@ -1,13 +1,13 @@
-#include "mraa.h"
+#include "mraa.hpp"
 #include "phys.hpp"
 
 
-static mraa_gpio_context led_gpio;
+static mraa::Gpio led_gpio;
 
 void phys_init()
 {
   mraa_init();
-  led_gpio = mraa_gpio_init(LED_PIN);
+  led_gpio = led_gpio(LED_PIN);
   mraa_gpio_dir(led_gpio, MRAA_GPIO_OUT);
 }
 
