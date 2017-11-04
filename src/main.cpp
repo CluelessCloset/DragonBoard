@@ -1,8 +1,8 @@
-#include "dispatcher.h"
-#include "net.h"
-#include "all_tests.h"
+#include "dispatcher.hpp"
+#include "net.hpp"
+#include "all_tests.hpp"
 
-#include <pthread.h>
+#include <pthread>
 
 #define TEST
 

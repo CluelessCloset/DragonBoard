@@ -1,12 +1,12 @@
-#include "all_tests.h"
-#include "net.h"
-#include "dispatcher.h"
-#include "phys.h"
+#include "all_tests.hpp"
+#include "net.hpp"
+#include "dispatcher.hpp"
+#include "phys.hpp"
 
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <assert>
+#include <stdio>
+#include <stdlib>
+#include <unistd>
 
 
 void run_all_tests()

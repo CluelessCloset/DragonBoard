@@ -1,5 +1,5 @@
 
-#include <stdbool.h>
+#include <stdbool>
 
 static bool running;
 void net_init()
