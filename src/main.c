@@ -2,7 +2,7 @@
 #include "net.h"
 #include "all_tests.h"
 
-#include <pthread>
+#include <pthread.h>
 
 #define TEST
 
