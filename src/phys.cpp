@@ -1,20 +1,22 @@
-#include "mraa.hpp"
-#include "phys.hpp"
+#include "mraa.h"
+#include "phys.h"
 
 
-class Phys {
-  mraa::Gpio led_gpio;
-public:
-  Phys();
-  phys_write_led();
-}
+mraa_gpio_context led_gpio;
 
-Phys() : led_gpio(LED_PIN)
-{ 
-  led_gpio.dir(mraa::DIR_OUT);
-}
-
-void Phys::phys_write_led(int value)
+void phys_init()
 {
-  led_gpio.write(value);
+  mraa_init();
+  led_gpio = mraa_gpio_init(LED_PIN);
+  mraa_gpio_dir(led_gpio, MRAA_GPIO_OUT);
+}
+
+void phys_write_led(int value)
+{
+  mraa_gpio_write(led_gpio, value);
+}
+
+int phys_read_force()
+{
+  return 1;
 }

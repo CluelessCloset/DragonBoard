@@ -10,6 +10,6 @@ void phys_init();
 
 void phys_write_led(int value);
 
-int phys_read_force()
+int phys_read_force();
 
 #endif
