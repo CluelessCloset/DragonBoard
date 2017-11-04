@@ -1,7 +1,7 @@
 #include "all_tests.h"
-#include "../src/net.h"
-#include "../src/dispatcher.h"
-#include "../src/phys.h"
+#include "net.h"
+#include "dispatcher.h"
+#include "phys.h"
 
 #include <assert.h>
 #include <stdio.h>
