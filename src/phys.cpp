@@ -34,7 +34,7 @@ void phys_write_led(int value)
 
 //app-level functions
 //probe the address for its force value and return it
-uint16_t phys_read_force(uint8_t address)
+mraa_result_t phys_read_force(uint8_t address)
 {
   phys_i2c_write(address, ADC_READ);
   return phys_i2c_read_2(address);
@@ -90,7 +90,7 @@ uint16_t phys_i2c_read_2(uint8_t address)
 {
   int r;
   uint16_t result;
-  mraa_i2c_address(i2c0, address)
+  mraa_i2c_address(i2c0, address);
   r = mraa_i2c_read(i2c0, rx_tx_buffer, 2);
   if(r == 2)
     result = (rx_tx_buffer[0] << 8) + rx_tx_buffer[1];
