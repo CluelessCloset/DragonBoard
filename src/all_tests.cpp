@@ -6,8 +6,10 @@
 #include <cassert>
 #include <cstdio>
 #include <stdlib.h>
+#include <stdint.h>
 #include <unistd.h>
 
+#define TEST_PHYS_ADDR  8
 
 void run_all_tests()
 {
@@ -59,6 +61,23 @@ void test_phys()
   sleep(1);
   phys_write_led(LOW);
   printf("LED should have blinked\n");
+
+  //now test the I2C interface.
+  printf("Make sure Arduino is started\n");
+  assert(bool phys_i2c_ping(TEST_PHYS_ADDR) == true);
+  phys_i2c_write_led(TEST_PHYS_ADDR, 1);
+  sleep(1);
+  phys_i2c_write_led(TEST_PHYS_ADDR, 0);
+  sleep(1);
+  uint16_t adc = phys_i2c_read_force(uint8_t address);
+  printf("Adc: %f\n", adc);
+  assert(adc != ERR);
+
+  printf("Phys interfaces passed tests")
+
 }
 
-void test_net();
+void test_net()
+{
+  // nothin yet :D
+}
