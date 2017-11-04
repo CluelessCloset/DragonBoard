@@ -2,7 +2,7 @@
 #include "phys.hpp"
 
 
-mraa_gpio_context led_gpio;
+static mraa_gpio_context led_gpio;
 
 void phys_init()
 {
