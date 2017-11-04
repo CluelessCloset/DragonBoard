@@ -54,10 +54,10 @@ void test_dispatcher()
 
 void test_phys()
 {
-  phys_init();
-  phys_write_led(HIGH);
+  Phys p();
+  p.phys_write_led(HIGH);
   sleep(1);
-  phys_write_led(LOW);
+  p.phys_write_led(LOW);
   printf("LED should have blinked\n");
 }
 

@@ -2,16 +2,19 @@
 #include "phys.hpp"
 
 
-static mraa::Gpio led_gpio;
-
-void phys_init()
-{
-  mraa_init();
-  led_gpio = led_gpio(LED_PIN);
-  mraa_gpio_dir(led_gpio, MRAA_GPIO_OUT);
+class Phys {
+  mraa::Gpio led_gpio;
+public:
+  Phys();
+  phys_write_led();
 }
 
-void phys_write_led(int value)
+Phys() : led_gpio(LED_PIN)
+{ 
+  led_gpio.dir(mraa::DIR_OUT);
+}
+
+void Phys::phys_write_led(int value)
 {
-  mraa_gpio_write(led_gpio, value);
+  led_gpio.write(value);
 }
