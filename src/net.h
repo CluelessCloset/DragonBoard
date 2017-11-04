@@ -15,4 +15,9 @@ typedef struct {
 void push_job(packet* p);
 packet pull_job();
 
+
+void net_init();
+//Constantly poll the network interface for new jobs from the server
+void * net_loop(void * x);
+
 #endif //NET_H

@@ -18,14 +18,10 @@ static pthread_mutex_t job_mutex;
 static bool running;
 
 
-int push_job(packet p);
-packet pull_job();
-
-
 /*
  * Call once to initiate the job queue
  */
-void init_dispatcher()
+void dispatcher_init()
 {
   sem_init(&full_spots, 0, 0); //consumer starts off locked
   sem_init(&empty_spots, 0, BUFFER_LEN); //producer starts off ready to go
@@ -84,7 +80,7 @@ packet pull_job()
 /*
  * Main loop for the job dispatcher
  */
-void * dispatch_loop(void * x)
+void * dispatcher_loop(void * x)
 {
   packet job;
 
