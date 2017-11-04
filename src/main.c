@@ -7,7 +7,7 @@
 #define TEST
 
 
-void main()
+int main()
 {
 
 #ifdef TEST
@@ -23,4 +23,5 @@ void main()
   pthread_create(&n_thread, NULL, net_loop, (void *) 0);
 
 #endif 
+  return 0;
 }
