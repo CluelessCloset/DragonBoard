@@ -1,6 +1,7 @@
 #include "../src/net.h"
 #include "../src/dispatcher.h"
 #include <assert.h>
+#include <stdio.h>
 #include "all_tests.h"
 
 void test_dispatcher()
@@ -36,4 +37,6 @@ void test_dispatcher()
 
   r = pull_job();
   assert(r.packet_type == p1.packet_type);
+
+  printf("Dispatcher passed tests");
 }
