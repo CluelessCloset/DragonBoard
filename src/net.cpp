@@ -1,3 +1,7 @@
+#include "sio_client.h"
+#include "sio_message.h"
+#include "sio_socket.h"
+
 static bool running;
 void net_init()
 {
