@@ -56,7 +56,7 @@ void test_phys()
 {
   phys_init();
   phys_write_led(HIGH);
-  sleep(1)
+  sleep(1);
   phys_write_led(LOW);
   printf("LED should have blinked\n");
 }
