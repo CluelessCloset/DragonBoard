@@ -1,11 +1,11 @@
 #include "net.hpp"
 #include "dispatcher.hpp"
 
-#include <stdio>
-#include <string>
-#include <semaphore>
-#include <pthread>
-#include <stdbool>
+#include <cstdio>
+#include <cstring>
+#include <semaphore.h>
+#include <pthread.h>
+
 
 static int empty_index; //next empty spot on the queue
 static int full_index; //index of the next job to pull off the queue

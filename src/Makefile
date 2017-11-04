@@ -6,4 +6,4 @@ CluelessCloset.exe: $(OBJ_FILES)
 	gpp $(LDFLAGS) -o $@ $^
 
 %.o: %.cpp
-	gcc $(CFLAGS) -c -o $@ $<
+	gpp $(CFLAGS) -c -o $@ $<

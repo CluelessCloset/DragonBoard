@@ -3,10 +3,10 @@
 #include "dispatcher.hpp"
 #include "phys.hpp"
 
-#include <assert>
-#include <stdio>
+#include <cassert>
+#include <cstdio>
 #include <stdlib>
-#include <unistd>
+#include <unistd.h>
 
 
 void run_all_tests()
@@ -54,10 +54,10 @@ void test_dispatcher()
 
 void test_phys()
 {
-  Phys p();
-  p.phys_write_led(HIGH);
+  phys_init();
+  phys_write_led(HIGH);
   sleep(1);
-  p.phys_write_led(LOW);
+  phys_write_led(LOW);
   printf("LED should have blinked\n");
 }
 
