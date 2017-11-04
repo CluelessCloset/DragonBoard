@@ -14,7 +14,7 @@ void test_dispatcher()
   p2.packet_type = 2;
   p3.packet_type = 3;
 
-  dispatcher_init()();
+  dispatcher_init();
   push_job(&p1);
 
   r = pull_job();
