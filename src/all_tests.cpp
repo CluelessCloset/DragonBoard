@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 #define TEST_PHYS_ADDR  0
-#define TEST_BAD_ADDR   7
+#define TEST_BAD_ADDR   6
 
 void run_all_tests()
 {
@@ -80,7 +80,7 @@ void test_phys()
   sleep(1);
   printf("Arduino Light should have blinked\n");
 
-  result = phys_bus_adc_read(uint8_t address);
+  result = phys_bus_adc_read(TEST_PHYS_ADDR);
   printf("Here's whether there's clohtes or not: %d", (int) result);
 
 }

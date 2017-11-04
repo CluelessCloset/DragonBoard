@@ -114,6 +114,7 @@ int phys_bus_call(uint8_t address, int cmd)
   }
   //phase 1 of bus
   //write cs and cmd to bus
+  printf("Writing CS  %d and CMD %d to bus\n", address, cmd);
   mraa_gpio_write(context_cs0, address & 1);
   mraa_gpio_write(context_cs1, (address >> 1) & 1);
   mraa_gpio_write(context_cs2, (address >> 2) & 1);
@@ -124,10 +125,11 @@ int phys_bus_call(uint8_t address, int cmd)
   //feather the bus edge and wait 
 
   mraa_gpio_write(context_control, HIGH);
-  usleep(10*1000); //delay 10 ms
+  usleep(100*1000); //delay 10 ms
   mraa_gpio_write(context_control, LOW);
-  usleep(10*1000); //delay 10 ms
+  usleep(100*1000); //delay 10 ms
 
+  printf("Flipped bus. Reading ACK and present\n");
   //arduino reads and reacts
   //phase 2 of bus
   mraa_gpio_write(context_control, HIGH);
@@ -135,10 +137,11 @@ int phys_bus_call(uint8_t address, int cmd)
   int read_ack = mraa_gpio_read(context_ack);
   int read_pres = mraa_gpio_read(context_present);
 
-  usleep(10*1000); //delay 10 ms
+  usleep(100*1000); //delay 10 ms
   mraa_gpio_write(context_control, LOW);
-  usleep(10*1000); //delay 10 ms
+  usleep(100*1000); //delay 10 ms
 
+  printf("Bus done: ACK %d and present %d\n", read_ack, read_pres);
   //bus done.
 
   //process the output
@@ -153,6 +156,7 @@ int phys_bus_call(uint8_t address, int cmd)
   ret += read_ack & 1;
   ret += (read_pres & 1) << 1;
 
+  printf("Bus done: final return %d\n", ret);
   return ret;
 }
 
@@ -197,7 +201,7 @@ bool phys_bus_adc_read(uint8_t address)
   int r = phys_bus_call(address, CMD_ADC_READ);
   if(r < 0)
     return false;
-  
+
   //return true if the slave asserted PRESENT
   if((r >> 1) & 1)
     return true;
