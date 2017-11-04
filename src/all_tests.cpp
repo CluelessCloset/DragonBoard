@@ -5,7 +5,7 @@
 
 #include <cassert>
 #include <cstdio>
-#include <stdlib>
+#include <stdlib.h>
 #include <unistd.h>
 
 
