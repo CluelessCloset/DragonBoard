@@ -1,9 +1,9 @@
-SRC_FILES := $(wildcard *.c)
-OBJ_FILES := $(patsubst %.c, %.o,$(SRC_FILES))
+SRC_FILES := $(wildcard *.cpp)
+OBJ_FILES := $(patsubst %.cpp, %.o,$(SRC_FILES))
 LDFLAGS := -lpthread -lmraa
 
 CluelessCloset.exe: $(OBJ_FILES)
-	gcc $(LDFLAGS) -o $@ $^
+	gpp $(LDFLAGS) -o $@ $^
 
-%.o: %.c
+%.o: %.cpp
 	gcc $(CFLAGS) -c -o $@ $<

@@ -60,3 +60,5 @@ void test_phys()
   phys_write_led(LOW);
   printf("LED should have blinked\n");
 }
+
+void test_net();

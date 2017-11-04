@@ -8,6 +8,8 @@
 
 void phys_init();
 
-void phys_write_led(int pin);
+void phys_write_led(int value);
+
+int phys_read_force()
 
 #endif
