@@ -18,7 +18,7 @@
 #define ADC_READ        0x03
 
 #define ACK             0xEE
-#define ERR             0xAA
+#define ERR             0x01
 
 //ADC constants
 #define ADC_THRESH      20  //is a good value.
