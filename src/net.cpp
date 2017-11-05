@@ -70,12 +70,12 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string); //ignore
         
         //get response for debugging
-        char* url;
+        char* url_out;
         long response_code;
         double elapsed;
         curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code); //HTTP response code
         curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed); //just shows total time
-        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &url); //shows last used url (in case of redirects)
+        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &url_out); //shows last used url (in case of redirects)
         
         //makes the actual transaction
         CURLcode res = curl_easy_perform(curl);
@@ -85,7 +85,7 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         printf("CurlCode: %s\n", res_str);
         printf("HTTP response: %d\n", response_code);
         printf("time elapsed: %d\n", elapsed);
-        printf("Url visited: %s\n", url.c_str());
+        printf("Url visited: %s\n", url_out;
         printf("Header string %s\n", header_string.c_str());
         printf("Response string: %s\n", response_string.c_str());
         return response_string;
