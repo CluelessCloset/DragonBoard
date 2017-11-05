@@ -88,7 +88,7 @@ void exec_job_lit(int num)
   if(youThereBro = true)
   {
     uint16_t r = phys_i2c_read_force((uint8_t) num);
-    if(r => ADC_THRESH)
+    if(r >= ADC_THRESH)
     {
       phys_i2c_write_led((uint8_t)num, HIGH);
     } 
