@@ -3,7 +3,7 @@
 #define NET_H
 
 #include <string>
-
+#include <curl/curl.h>
 //packet stuff
 #define DATA_LEN 252
 
@@ -34,9 +34,8 @@ public:
   bool packetValid();
 private:
 
-
   //use curl to retrieve some info
-  std::string response  curl_get_string(std::string url, std::string authEmail, int timeout_ms);
+  std::string  curl_get_string(std::string url, std::string authEmail, int timeout_ms);
 
   //parses server response -> packet
   packet parsePacket(std::string inMsg);
@@ -46,7 +45,7 @@ private:
   //thread is running
   bool running;
   //CURL * for the interface
-  auto curl;
+  CURL* curl;
   //url to get status messages from
   std::string status_url; 
   std::string email;
