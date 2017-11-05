@@ -100,6 +100,7 @@ void phys_led_write(int value)
 //-1 on fail
 int phys_bus_call(uint8_t address, int cmd)
 {
+  mraa_result_t r = MRAA_SUCCESS;
   //sanity check inputs
   if(address > 7)
   {

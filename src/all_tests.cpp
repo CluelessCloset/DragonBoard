@@ -14,7 +14,7 @@
 
 void run_all_tests()
 {
-  test_dispatcher();
+  //test_dispatcher();
   test_phys();
 }
 
