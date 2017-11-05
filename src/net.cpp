@@ -120,7 +120,7 @@ bool HangerNet::isPacketValid()
 //server response in, packet out
 //given a message like this---"{"hanger" : 5}"
   //just turns into a ping message
-packet parsePacket(std::string inMsg)
+packet HangerNet::parsePacket(std::string inMsg)
 {
   //top notch parser incomig ;)
 
