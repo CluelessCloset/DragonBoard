@@ -15,8 +15,8 @@
 void run_all_tests()
 {
   //test_dispatcher();
-  test_phys();
-  //test_net();
+  //test_phys();
+  test_net();
 }
 
 void test_dispatcher()
@@ -77,7 +77,7 @@ void test_phys()
   for(int i = 0; i <10; i++)
   {
     uint16_t adc = phys_i2c_read_force(TEST_PHYS_ADDR);
-    printf("Adc: %f\n", adc);
+    printf("Adc: %d\n", adc);
     assert(adc != ERR);
     usleep(500*1000);
   }

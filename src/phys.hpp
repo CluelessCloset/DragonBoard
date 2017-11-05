@@ -21,7 +21,7 @@
 #define ERR             0xAA
 
 //ADC constants
-#define ADC_THRESH      256 
+#define ADC_THRESH      30 
 void phys_init();
 
 void phys_write_led(int value);

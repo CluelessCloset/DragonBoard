@@ -91,7 +91,7 @@ uint16_t phys_i2c_read_2(uint8_t address)
 {
   int r;
   uint16_t result;
-  printf("Reading 2 bytes");
+  printf("Reading 2 bytes: ");
   mraa_i2c_address(i2c0, address);
   r = mraa_i2c_read(i2c0, rx_tx_buffer, 2);
   if(r == 2)
