@@ -3,6 +3,7 @@
 #include <curl/curl.h>
 #include <string>
 #include <cstdlib>
+#include <unistd.h>
 
 //Constantly poll the network interface for new jobs from the server
 void * net_loop(void * x)

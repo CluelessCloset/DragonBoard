@@ -84,24 +84,24 @@ packet pull_job()
 //if its there, ping it, and if it has a shirt on it, light it up.
 void *exec_job_lit(void * data)
 {
-  int num = *data;
-  bool youThereBro = phys_i2c_ping((uint8_t) num);
+  int* num = data;
+  bool youThereBro = phys_i2c_ping((uint8_t) *num);
   if(youThereBro = true)
   {
-    phys_i2c_write_led((uint8_t)num, HIGH);
+    phys_i2c_write_led((uint8_t)*num, HIGH);
     uint16_t r 
     while(r < ADC_THRESH)
     {
-      phys_i2c_read_force((uint8_t) num);
+      phys_i2c_read_force((uint8_t) *num);
       usleep(10*1000);
     }
 
-    phys_i2c_write_led((uint8_t)num, LOW);
+    phys_i2c_write_led((uint8_t)*num, LOW);
      
   }
   else
   {
-    printf("nah man, can't light that up which is not there: %d \n", num);
+    printf("nah man, can't light that up which is not there: %d \n", *num);
   }
 }
 
