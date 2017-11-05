@@ -80,7 +80,7 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         //debugski
         printf("HTTP response: %d\n", response_code);
         printf("time elapsed: %d\n", elapsed);
-        printf("Url visited: %s", url);
+        printf("Url visited: %s\n", url);
         return response_string;
     } else {
       printf("Curl not initialized before trying to call curl_get_string. Re-init-ing");
