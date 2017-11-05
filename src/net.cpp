@@ -7,7 +7,7 @@
 //Constantly poll the network interface for new jobs from the server
 void * net_loop(void * x)
 {
-  HangerNet h("http://cluelesscloset.tech/", "dickbutt@gmail.com");
+  HangerNet h("http://cluelesscloset.tech/", "d@d.com");
   
   while(h.running)
   {

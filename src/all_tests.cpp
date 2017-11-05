@@ -15,7 +15,8 @@
 void run_all_tests()
 {
   //test_dispatcher();
-  test_phys();
+  //test_phys();
+  test_net();
 }
 
 void test_dispatcher()
@@ -87,7 +88,7 @@ void test_phys()
 void test_net()
 {
   printf("Super dependant on what the server you're trying to ping is going");
-  HangerNet h("localhost:1337", "amacgregor.2018@comcast.net");
+  HangerNet h("http://cluelesscloset.tech/", "d@d.com");
   packet p = h.pollServer();
   printf("Here's your packet type: %d with first data: %d", p.packet_type, p.data[0]);
 
