@@ -85,20 +85,20 @@ packet pull_job()
 void *exec_job_lit(void * data)
 {
   int num = *(int *)data;
-  printf("Time to get lit on hanger %d\n", *num);
-  bool youThereBro = phys_i2c_ping((uint8_t) *num);
+  printf("Time to get lit on hanger %d\n", num);
+  bool youThereBro = phys_i2c_ping((uint8_t) num);
   if(youThereBro == true)
   {
-    phys_i2c_write_led((uint8_t)*num, HIGH);
+    phys_i2c_write_led((uint8_t)num, HIGH);
     uint16_t r = 0; 
     while(r < ADC_THRESH)
     {
       printf("Polling the sensor %d\n", r);
-      r = phys_i2c_read_force((uint8_t) *num);
+      r = phys_i2c_read_force((uint8_t) num);
       usleep(500*1000);
     }
 
-    phys_i2c_write_led((uint8_t)*num, LOW);
+    phys_i2c_write_led((uint8_t)num, LOW);
      
   }
   else
