@@ -87,7 +87,7 @@ void test_phys()
 void test_net()
 {
   printf("Super dependant on what the server you're trying to ping is going");
-  HangerNet h = new HangerNet("localhost:1337", "amacgregor.2018@comcast.net");
+  HangerNet h("localhost:1337", "amacgregor.2018@comcast.net");
   packet p = h.pollServer();
   printf("Here's your packet type: %d with first data: %d", p.packet_type, p.data[0]);
 
