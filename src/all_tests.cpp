@@ -102,5 +102,6 @@ void test_net()
   phys_i2c_write_led(TEST_PHYS_ADDR, 1);
   sleep(1);
 
+  phys_i2c_write_led(TEST_PHYS_ADDR, 0);
   phys_write_led(LOW);
 }
