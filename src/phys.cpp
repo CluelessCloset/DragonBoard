@@ -90,7 +90,7 @@ uint8_t phys_i2c_read_1(uint8_t address)
 {
   pthread_mutex_lock(&i2c_mutex);
   mraa_i2c_address(i2c0, address);
-  uint8_t r = (uint8_t)mraa_i2c_read_byte(i2c0)
+  uint8_t r = (uint8_t)mraa_i2c_read_byte(i2c0);
   pthread_mutex_unlock(&i2c_mutex);
   return r;
 }

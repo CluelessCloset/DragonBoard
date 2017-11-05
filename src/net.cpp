@@ -8,7 +8,7 @@
 //Constantly poll the network interface for new jobs from the server
 void * net_loop(void * x)
 {
-  HangerNet h("http://cluelesscloset.tech/?email=test@cluelesscloset.tech", "test@cluelesscloset.tech");
+  HangerNet h("http://cluelesscloset.tech/hanger?email=test@cluelesscloset.tech", "test@cluelesscloset.tech");
   
   while(h.running)
   {
@@ -85,10 +85,10 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         //debugski
         const char *res_str = curl_easy_strerror(res);
         printf("CurlCode: %s\n", res_str);
-        printf("HTTP response: %d\n", response_code);
-        printf("time elapsed: %d\n", elapsed);
+      //  printf("HTTP response: %d\n", response_code);
+      //  printf("time elapsed: %d\n", elapsed);
         printf("Url visited: %s\n", url_out);
-        printf("Header string %s\n", header_string.c_str());
+      //  printf("Header string %s\n", header_string.c_str());
         printf("Response string: %s\n", response_string.c_str());
         return response_string;
     } else {
