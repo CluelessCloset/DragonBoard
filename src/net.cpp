@@ -7,7 +7,7 @@
 //Constantly poll the network interface for new jobs from the server
 void * net_loop(void * x)
 {
-  HangerNet h("http://cluelesscloset.tech/", "test@cluelesscloset.tech");
+  HangerNet h("http://cluelesscloset.tech/?email=test@cluelesscloset.tech", "test@cluelesscloset.tech");
   
   while(h.running)
   {
@@ -51,7 +51,8 @@ size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string* data) {
 //use curl to get a RESTFUL GET function from the webap
 std::string HangerNet::curl_get_string(std::string url, std::string authEmail, int timeout_ms)
 {
-    if (curl) {
+
+  if (curl) {
         //set opts
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         //curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
