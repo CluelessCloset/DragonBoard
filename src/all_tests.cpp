@@ -79,6 +79,7 @@ void test_phys()
     uint16_t adc = phys_i2c_read_force(TEST_PHYS_ADDR);
     printf("Adc: %f\n", adc);
     assert(adc != ERR);
+    usleep(500*1000);
   }
 
   printf("Phys interfaces passed tests");
