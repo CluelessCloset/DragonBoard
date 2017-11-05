@@ -15,8 +15,8 @@
 void run_all_tests()
 {
   //test_dispatcher();
-  //test_phys();
-  test_net();
+  test_phys();
+  //test_net();
 }
 
 void test_dispatcher()
