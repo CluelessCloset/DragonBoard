@@ -82,37 +82,29 @@ packet pull_job()
 //Actually exec commands from the server
 //Ping hanger: num
 //if its there, ping it, and if it has a shirt on it, light it up.
-void exec_job_lit(int num, int val)
+void *exec_job_lit(void * data)
 {
+  int num = *data;
   bool youThereBro = phys_i2c_ping((uint8_t) num);
   if(youThereBro = true)
   {
-    uint16_t r = phys_i2c_read_force((uint8_t) num);
-    if(r >= ADC_THRESH)
+    phys_i2c_write_led((uint8_t)num, HIGH);
+    uint16_t r 
+    while(r < ADC_THRESH)
     {
-      phys_i2c_write_led((uint8_t)num, val);
-    } 
+      phys_i2c_read_force((uint8_t) num);
+      usleep(10*1000);
+    }
+
+    phys_i2c_write_led((uint8_t)num, LOW);
+     
   }
   else
   {
-    printf("nah man, can't light that up which is not there\n");
+    printf("nah man, can't light that up which is not there: %d \n", num);
   }
 }
 
-//sweep sensors known to be online
-//check their ADCs. If no shirt, led OFF
-void exec_job_update()
-{
-
-}
-
-//ping all the sensors in the address range.
-//if they're there, add to list of online-hangers.
-//if they're not, remove from list of online-hangers.
-void exec_job_status_sweep()
-{
-
-}
 
 /*
  * Main loop for the job dispatcher.
@@ -131,7 +123,9 @@ void * dispatcher_loop(void * x)
     switch(job.packet_type)
     {
       case JOB_LIT:
-        exec_job_lit(job.data[0], job.data[1]);
+        pthread_t litThread;
+        printf("spawning litThread");
+        pthread_create(&litThread, NULL, exec_job_lit, &job.data[0]);
         break;
       case JOB_GIVE_STATUS:
       case JOB_UPDATE:

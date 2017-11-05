@@ -17,9 +17,9 @@ void * net_loop(void * x)
     {
       push_job(&p);
       //respond with some kind of status?
-      //threadSafeGetStatus()...
-      //h.sendStatus()
+        //not at this hackathon
     }
+    sleep(1);
 
   }
 
@@ -151,7 +151,6 @@ packet HangerNet::parsePacket(std::string inMsg)
   packet p;
   p.packet_type = JOB_LIT;
   p.data[0] = num;
-  p.data[1] = 1; //high
 
   return p;
 }

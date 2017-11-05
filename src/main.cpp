@@ -4,7 +4,7 @@
 
 #include <pthread.h>
 
-#define TEST
+//#define TEST
 
 
 int main()
