@@ -92,8 +92,8 @@ void test_net()
   printf("Super dependant on what the server you're trying to ping is going\n");
   HangerNet h(addr, email);
   packet p = h.pollServer();
-  
-  printf("tried to reach %s with email: %s\n", addr, email);
+
+  printf("tried to reach %s with email: %s\n", addr.c_str(), email.c_str());
   printf("Here's your packet type: %d with first data: %d\n", p.packet_type, p.data[0]);
 
 }
