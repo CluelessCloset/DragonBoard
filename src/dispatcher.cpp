@@ -1,5 +1,6 @@
 #include "net.hpp"
 #include "dispatcher.hpp"
+#include "phys.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -77,8 +78,49 @@ packet pull_job()
 
   return p;
 } 
+
+//Actually exec commands from the server
+//Ping hanger: num
+//if its there, ping it, and if it has a shirt on it, light it up.
+void exec_job_lit(int num)
+{
+  bool youThereBro = phys_i2c_ping((uint8_t) num);
+  if(youThereBro = true)
+  {
+    uint16_t r = phys_i2c_read_force((uint8_t) num);
+    if(r => ADC_THRESH)
+    {
+      phys_i2c_write_led((uint8_t)num, HIGH);
+    } 
+    else 
+    {
+      phys_i2c_write_led((uint8_t)num, LOW);
+    }
+  }
+  else
+  {
+    printf("nah man, can't light that up which is not there\n");
+  }
+}
+
+//sweep sensors known to be online
+//check their ADCs. If no shirt, led OFF
+void exec_job_update()
+{
+
+}
+
+//ping all the sensors in the address range.
+//if they're there, add to list of online-hangers.
+//if they're not, remove from list of online-hangers.
+void exec_job_status_sweep()
+{
+
+}
+
 /*
- * Main loop for the job dispatcher
+ * Main loop for the job dispatcher.
+ * dispatch by job type and parse packet contents
  */
 void * dispatcher_loop(void * x)
 {
@@ -92,7 +134,12 @@ void * dispatcher_loop(void * x)
     //process the job
     switch(job.packet_type)
     {
-      default: //todo, cases
+      case JOB_LIT:
+        exec_job_lit(job.data[0]);
+        break;
+      case JOB_GIVE_STATUS:
+      case JOB_UPDATE:
+      default: //intentional fallthru
         break;
     }
   }

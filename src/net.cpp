@@ -1,50 +1,144 @@
 
 #include <curl/curl.h>
-
-static bool running;
-void net_init()
-{
-
-}
+#include <string>
+#include <cstdlib>
 
 //Constantly poll the network interface for new jobs from the server
 void * net_loop(void * x)
 {
+  HangerNet h = new HangerNet("http://cluelesscloset.tech/", "dickbutt@gmail.com");
+  
   while(running)
   {
-    //nothing
+    packet p = h.pollServer();
+
+    if(h.lastPacketValid())
+    {
+      push_job(&p);
+      //respond with some kind of status?
+      //threadSafeGetStatus()...
+      //h.sendStatus()
+    }
+
+
   }
 
   return (void *) 0;
 }
 
-//use curl to get a RESTFUL GET function from the webap
-int curl_get()
+//Hanger_Net implementation
+HangerNet::HangerNet(std::string statUrl, std::string authEmail);
 {
-    auto curl = curl_easy_init();
+  status_url = statUrl;
+  email = authEmail;
+  curl = curl_easy_init();
+}
+
+HangerNet::~HangerNet()
+{
+  curl_easy_cleanup(curl);
+}
+
+/*
+ * Callback to write the received data to a string (data)
+ */
+size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string* data) {
+    data->append((char*) ptr, size * nmemb);
+    return size * nmemb;
+}
+
+//receive callback to write data
+//use curl to get a RESTFUL GET function from the webap
+std::string response HangerNet::curl_get(std::string url, std::string authEmail, int timeout_ms)
+{
     if (curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "https://api.github.com/repos/whoshuu/cpr/contributors?anon=true&key=value");
+        //set opts
+        curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
-        curl_easy_setopt(curl, CURLOPT_USERPWD, "user:pass");
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl/7.42.0");
         curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
         curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
+        curl_easy_setopt(curl, CURLOPT_EXPECT_100_TIMEOUT_MS, timeout_ms);
         
         std::string response_string;
-        std::string header_string;
+        //std::string header_string; //ignore
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunction);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string);
+        //curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string); //ignore
         
+        //get response for debugging
         char* url;
         long response_code;
         double elapsed;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
-        curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed);
-        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &url);
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code); //HTTP response code
+        curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed); //just shows total time
+        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &url); //shows last used url (in case of redirects)
         
+        //makes the actual transaction
         curl_easy_perform(curl);
-        curl_easy_cleanup(curl);
-        curl = NULL;
+
+        //debugski
+        printf("HTTP response: %d\n", response_code);
+        printf("time elapsed: %d\n", elapsed);
+        printf("Url visited: %s", url);
+        return response_string;
+    } else {
+      printf("Curl not initialized before trying to call curl_get. Re-init-ing");
+      curl = curl_easy_init();
+      return ""; //empty string means nothing useful. 
     }
+}
+
+/* 
+ * Uses curl to poll the server
+ * If it timesout, return nothing
+ * if it gets a legit message, return that
+ */
+
+packet HangerNet::pollServer()
+{
+  std:string response = curl_get(status_url, email, 500);
+  if(response.empty())
+  {
+    lastPacketValid = false
+    packet p;
+    return packet;
+  }
+  else
+  {
+    lastPacketValid = true;
+    return parsePacket(response);
+  }
+}
+
+bool HangerNet::packetValid()
+{
+  return lastPacketValid;
+}
+
+//server response in, packet out
+//given a message like this---"{"hanger" : 5}"
+  //just turns into a ping message
+packet parsePacket(std::string inMsg)
+{
+  //top notch parser incomig ;)
+
+  //yoink all of the digits out of inMsg and make them into a string.
+  std::string numYoink = "";
+  for(unsigned int i = 0; i < inMsg.length(); i++)
+  {
+      char c = inMsg[i];
+      if( c >= '0' && c <= '9')
+      {
+        numYoink += c;
+      }
+  }
+  int num = strtol(numYoink.c_str(), 0, 10);
+
+  //make a packet out of the results;
+  packet p;
+  p.packet_type = JOB_LIT;
+  p.data[0] = num;
+
+  return p;
 }

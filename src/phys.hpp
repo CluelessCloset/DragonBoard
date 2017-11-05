@@ -20,6 +20,8 @@
 #define ACK             0xEE
 #define ERR             0xAA
 
+//ADC constants
+#define ADC_THRESH      256 
 void phys_init();
 
 void phys_write_led(int value);

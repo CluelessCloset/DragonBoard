@@ -1,6 +1,6 @@
 SRC_FILES := $(wildcard *.cpp)
 OBJ_FILES := $(patsubst %.cpp, %.o,$(SRC_FILES))
-LDFLAGS := -lpthread -lmraa -lboost_date_time -lboost_random -lboost_system
+LDFLAGS := -lpthread -lmraa -lboost_date_time -lboost_random -lboost_system -lcurl
 CPPFLAGS += -g
 C_INCLUDE_PATH += /root/socket.io-client-cpp/build/include
 CPLUS_INCLUDE_PATH += /root/socket.io-client-cpp/build/include

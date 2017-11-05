@@ -72,9 +72,13 @@ void test_phys()
   sleep(1);
   phys_i2c_write_led(TEST_PHYS_ADDR, 0);
   sleep(1);
-  uint16_t adc = phys_i2c_read_force(TEST_PHYS_ADDR);
-  printf("Adc: %f\n", adc);
-  assert(adc != ERR);
+
+  for(int i = 0; i <10; i++)
+  {
+    uint16_t adc = phys_i2c_read_force(TEST_PHYS_ADDR);
+    printf("Adc: %f\n", adc);
+    assert(adc != ERR);
+  }
 
   printf("Phys interfaces passed tests");
 
@@ -82,5 +86,9 @@ void test_phys()
 
 void test_net()
 {
-  // nothin yet :D
+  printf("Super dependant on what the server you're trying to ping is going");
+  HangerNet h = new HangerNet("localhost:1337", "amacgregor.2018@comcast.net");
+  packet p = h.pollServer();
+  printf("Here's your packet type: %d with first data: %d", p.packet_type, p.data[0]);
+
 }
