@@ -97,4 +97,6 @@ void test_net()
   printf("tried to reach %s with email: %s\n", addr.c_str(), email.c_str());
   printf("Here's your packet type: %d with first data: %d, %d \n", p.packet_type, p.data[0], p.data[1]);
 
+  phys_i2c_write_led(TEST_PHYS_ADDR, 1);
+  sleep(1);
 }
