@@ -99,7 +99,7 @@ packet HangerNet::pollServer()
 {
   lastPacketValid = false;
 
-  std:string response = curl_get_string(status_url, email, 500);
+  std::string response = curl_get_string(status_url, email, 500);
   if(response.empty())
   {
     packet p;
