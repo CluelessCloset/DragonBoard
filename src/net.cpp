@@ -54,7 +54,9 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
     if (curl) {
         //set opts
         curl_easy_setopt(curl, CURLOPT_URL, url);
-        curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+        //curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);:x
+
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl/7.42.0");
         curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
         curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
@@ -76,9 +78,11 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &url); //shows last used url (in case of redirects)
         
         //makes the actual transaction
-        curl_easy_perform(curl);
+        CURLcode res = curl_easy_perform(curl);
 
         //debugski
+        const char *res_str = curl_easy_strerror(res);
+        printf("CurlCode: %s\n", res_str);
         printf("HTTP response: %d\n", response_code);
         printf("time elapsed: %d\n", elapsed);
         printf("Url visited: %s\n", url);
