@@ -95,7 +95,7 @@ void *exec_job_lit(void * data)
     {
       printf("Polling the sensor %d\n", r);
       r = phys_i2c_read_force((uint8_t) num);
-      usleep(500*1000);
+      usleep(10*1000);
     }
 
     phys_i2c_write_led((uint8_t)num, LOW);
@@ -103,7 +103,7 @@ void *exec_job_lit(void * data)
   }
   else
   {
-    printf("nah man, can't light that up which is not there: %d \n", *num);
+    printf("nah man, can't light that up which is not there: %d \n", num);
   }
 }
 
