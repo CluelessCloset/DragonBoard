@@ -59,6 +59,7 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
         curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
         curl_easy_setopt(curl, CURLOPT_EXPECT_100_TIMEOUT_MS, timeout_ms);
+        curl_easy_setopt(curl, CURLOPT_PORT, 80);
         
         std::string response_string;
         std::string header_string; //ignore
