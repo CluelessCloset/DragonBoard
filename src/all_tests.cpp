@@ -88,6 +88,8 @@ void test_phys()
 
 void test_net()
 {
+  phys_init();
+  phys_write_led(HIGH);
   std::string addr = "http://cluelesscloset.tech/hanger?email=test@cluelesscloset.tech";
   std::string email = "test@cluelesscloset.tech";
   printf("Sending curl to serverwith %s and %s \n", addr.c_str(), email.c_str());
@@ -99,4 +101,6 @@ void test_net()
 
   phys_i2c_write_led(TEST_PHYS_ADDR, 1);
   sleep(1);
+
+  phys_write_led(LOW);
 }
