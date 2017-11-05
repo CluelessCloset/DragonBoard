@@ -1,7 +1,8 @@
 //TODO  TCP connection parameters
-
 #ifndef NET_H
 #define NET_H
+
+#include <string>
 
 //packet stuff
 #define DATA_LEN 252
@@ -35,7 +36,7 @@ private:
 
 
   //use curl to retrieve some info
-  std::string response  curl_get(std::string url, std::string authEmail, int timeout_ms);
+  std::string response  curl_get_string(std::string url, std::string authEmail, int timeout_ms);
 
   //parses server response -> packet
   packet parsePacket(std::string inMsg);

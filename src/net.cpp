@@ -1,3 +1,4 @@
+#include "net.hpp"
 
 #include <curl/curl.h>
 #include <string>
@@ -19,7 +20,6 @@ void * net_loop(void * x)
       //threadSafeGetStatus()...
       //h.sendStatus()
     }
-
 
   }
 
@@ -49,7 +49,7 @@ size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string* data) {
 
 //receive callback to write data
 //use curl to get a RESTFUL GET function from the webap
-std::string response HangerNet::curl_get(std::string url, std::string authEmail, int timeout_ms)
+std::string response HangerNet::curl_get_string(std::string url, std::string authEmail, int timeout_ms)
 {
     if (curl) {
         //set opts
@@ -83,7 +83,7 @@ std::string response HangerNet::curl_get(std::string url, std::string authEmail,
         printf("Url visited: %s", url);
         return response_string;
     } else {
-      printf("Curl not initialized before trying to call curl_get. Re-init-ing");
+      printf("Curl not initialized before trying to call curl_get_string. Re-init-ing");
       curl = curl_easy_init();
       return ""; //empty string means nothing useful. 
     }
@@ -97,7 +97,7 @@ std::string response HangerNet::curl_get(std::string url, std::string authEmail,
 
 packet HangerNet::pollServer()
 {
-  std:string response = curl_get(status_url, email, 500);
+  std:string response = curl_get_string(status_url, email, 500);
   if(response.empty())
   {
     lastPacketValid = false
