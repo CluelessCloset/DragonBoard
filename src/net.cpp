@@ -53,7 +53,7 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
 {
     if (curl) {
         //set opts
-        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         //curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);:x
 
@@ -85,7 +85,7 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         printf("CurlCode: %s\n", res_str);
         printf("HTTP response: %d\n", response_code);
         printf("time elapsed: %d\n", elapsed);
-        printf("Url visited: %s\n", url);
+        printf("Url visited: %s\n", url.c_str());
         printf("Header string %s\n", header_string.c_str());
         printf("Response string: %s\n", response_string.c_str());
         return response_string;
