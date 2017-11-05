@@ -6,7 +6,7 @@
 #include <cstring>
 #include <semaphore.h>
 #include <pthread.h>
-
+#include <unistd.h>
 
 static int empty_index; //next empty spot on the queue
 static int full_index; //index of the next job to pull off the queue
@@ -84,12 +84,12 @@ packet pull_job()
 //if its there, ping it, and if it has a shirt on it, light it up.
 void *exec_job_lit(void * data)
 {
-  int* num = data;
+  int* num = (int *)data;
   bool youThereBro = phys_i2c_ping((uint8_t) *num);
   if(youThereBro = true)
   {
     phys_i2c_write_led((uint8_t)*num, HIGH);
-    uint16_t r 
+    uint16_t r; 
     while(r < ADC_THRESH)
     {
       phys_i2c_read_force((uint8_t) *num);

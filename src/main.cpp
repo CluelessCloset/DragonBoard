@@ -14,7 +14,6 @@ int main()
   run_all_tests();
 #else
   dispatcher_init();
-  net_init();
 
   pthread_t d_thread;
   pthread_t n_thread;
