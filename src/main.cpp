@@ -1,6 +1,7 @@
 #include "dispatcher.hpp"
 #include "net.hpp"
 #include "all_tests.hpp"
+#include "phys.hpp"
 
 #include <pthread.h>
 
@@ -14,6 +15,9 @@ int main()
   run_all_tests();
 #else
   dispatcher_init();
+  phys_init();
+  //red light means its on
+  phys_write_led(HIGH);
 
   pthread_t d_thread;
   pthread_t n_thread;
@@ -23,6 +27,8 @@ int main()
 
   pthread_join(d_thread, NULL);
   pthread_join(n_thread, NULL);
+
+  phys_write_led(LOW);
 #endif 
   return 0;
 }
