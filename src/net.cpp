@@ -103,7 +103,7 @@ packet HangerNet::pollServer()
   if(response.empty())
   {
     packet p;
-    return packet;
+    return p;
   }
   else
   {
@@ -112,7 +112,7 @@ packet HangerNet::pollServer()
   }
 }
 
-bool HangerNet::packetValid()
+bool HangerNet::isPacketValid()
 {
   return lastPacketValid;
 }
