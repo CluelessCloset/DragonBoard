@@ -9,7 +9,7 @@ void * net_loop(void * x)
 {
   HangerNet h("http://cluelesscloset.tech/", "dickbutt@gmail.com");
   
-  while(running)
+  while(h.running)
   {
     packet p = h.pollServer();
 
@@ -26,7 +26,7 @@ void * net_loop(void * x)
   return (void *) 0;
 }
 
-HangerNet::HangerNet(std::string statUrl, std::string authEmail);
+HangerNet::HangerNet(std::string statUrl, std::string authEmail)
 {
   running = true;
   status_url = statUrl;
@@ -49,7 +49,7 @@ size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string* data) {
 
 //receive callback to write data
 //use curl to get a RESTFUL GET function from the webap
-std::string response HangerNet::curl_get_string(std::string url, std::string authEmail, int timeout_ms)
+std::string HangerNet::curl_get_string(std::string url, std::string authEmail, int timeout_ms)
 {
     if (curl) {
         //set opts
