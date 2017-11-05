@@ -85,6 +85,7 @@ packet pull_job()
 void *exec_job_lit(void * data)
 {
   int* num = (int *)data;
+  printf("Time to get lit on hanger %d\n", *num);
   bool youThereBro = phys_i2c_ping((uint8_t) *num);
   if(youThereBro = true)
   {
@@ -124,7 +125,7 @@ void * dispatcher_loop(void * x)
     {
       case JOB_LIT:
         pthread_t litThread;
-        printf("spawning litThread");
+        printf("spawning litThread\n");
         pthread_create(&litThread, NULL, exec_job_lit, &job.data[0]);
         break;
       case JOB_GIVE_STATUS:
