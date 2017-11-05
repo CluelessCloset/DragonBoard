@@ -95,6 +95,6 @@ void test_net()
   packet p = h.pollServer();
 
   printf("tried to reach %s with email: %s\n", addr.c_str(), email.c_str());
-  printf("Here's your packet type: %d with first data: %d\n", p.packet_type, p.data[0]);
+  printf("Here's your packet type: %d with first data: %d, %d \n", p.packet_type, p.data[0], p.data[1]);
 
 }

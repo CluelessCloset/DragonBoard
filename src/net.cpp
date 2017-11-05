@@ -55,7 +55,7 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
   if (curl) {
         //set opts
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        //curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+        curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl/7.42.0");
@@ -132,6 +132,7 @@ bool HangerNet::isPacketValid()
 packet HangerNet::parsePacket(std::string inMsg)
 {
   //top notch parser incomig ;)
+  printf("Incoming message: %s\n", inMsg);
 
   //yoink all of the digits out of inMsg and make them into a string.
   std::string numYoink = "";
