@@ -7,7 +7,7 @@
 //Constantly poll the network interface for new jobs from the server
 void * net_loop(void * x)
 {
-  HangerNet h("http://cluelesscloset.tech/", "d@d.com");
+  HangerNet h("http://cluelesscloset.tech/", "test@cluelesscloset.tech");
   
   while(h.running)
   {
@@ -148,6 +148,7 @@ packet HangerNet::parsePacket(std::string inMsg)
   packet p;
   p.packet_type = JOB_LIT;
   p.data[0] = num;
+  p.data[1] = 1; //high
 
   return p;
 }

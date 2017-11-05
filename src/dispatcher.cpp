@@ -135,7 +135,7 @@ void * dispatcher_loop(void * x)
     switch(job.packet_type)
     {
       case JOB_LIT:
-        exec_job_lit(job.data[0]);
+        exec_job_lit(job.data[0], job.data[1]);
         break;
       case JOB_GIVE_STATUS:
       case JOB_UPDATE:
