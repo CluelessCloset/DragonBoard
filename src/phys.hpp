@@ -7,7 +7,7 @@
 #define LED_PIN         23
 #define HIGH            1
 #define LOW             0
-#define I2C_BUFFER_MAX  10
+#define I2C_BUFFER_MAX  256
 #define I2C_BUS         0 
 
 
