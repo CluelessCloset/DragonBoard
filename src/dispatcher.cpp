@@ -87,7 +87,7 @@ void *exec_job_lit(void * data)
   int* num = (int *)data;
   printf("Time to get lit on hanger %d\n", *num);
   bool youThereBro = phys_i2c_ping((uint8_t) *num);
-  if(youThereBro = true)
+  if(youThereBro == true)
   {
     phys_i2c_write_led((uint8_t)*num, HIGH);
     uint16_t r; 
