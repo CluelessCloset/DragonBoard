@@ -112,6 +112,7 @@ packet HangerNet::pollServer()
   if(response.empty())
   {
     packet p;
+    printf("Got empty responds\n");
     return p;
   }
   else
@@ -132,7 +133,7 @@ bool HangerNet::isPacketValid()
 packet HangerNet::parsePacket(std::string inMsg)
 {
   //top notch parser incomig ;)
-  printf("Incoming message: %s\n", inMsg);
+  printf("Incoming message: %s\n", inMsg.c_str());
 
   //yoink all of the digits out of inMsg and make them into a string.
   std::string numYoink = "";

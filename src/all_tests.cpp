@@ -88,7 +88,7 @@ void test_phys()
 
 void test_net()
 {
-  std::string addr = "http://cluelesscloset.tech/?email=test@cluelesscloset.tech";
+  std::string addr = "http://cluelesscloset.tech/hanger?email=test@cluelesscloset.tech";
   std::string email = "test@cluelesscloset.tech";
   printf("Sending curl to serverwith %s and %s \n", addr.c_str(), email.c_str());
   HangerNet h(addr, email);
