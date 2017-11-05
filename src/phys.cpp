@@ -23,6 +23,7 @@ void phys_init()
 
   //init i2C bus
   i2c0 = mraa_i2c_init(I2C_BUS);
+  printf("i2c bus + led interface initialized");
 }
 
 //write to the red LED on the dragon
@@ -90,6 +91,7 @@ uint16_t phys_i2c_read_2(uint8_t address)
 {
   int r;
   uint16_t result;
+  printf("Reading 2 bytes");
   mraa_i2c_address(i2c0, address);
   r = mraa_i2c_read(i2c0, rx_tx_buffer, 2);
   if(r == 2)
@@ -97,5 +99,6 @@ uint16_t phys_i2c_read_2(uint8_t address)
   else
     result = ERR; //make this more visible
 
+  printf("Results = %d\n", result);
   return result;
 }

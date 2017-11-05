@@ -10,10 +10,11 @@
 #include <unistd.h>
 
 #define TEST_PHYS_ADDR  8
+#define BAD_PHYS_ADDR   4
 
 void run_all_tests()
 {
-  test_dispatcher();
+  //test_dispatcher();
   test_phys();
 }
 
@@ -61,10 +62,12 @@ void test_phys()
   sleep(1);
   phys_write_led(LOW);
   printf("LED should have blinked\n");
+  sleep(1);
 
   //now test the I2C interface.
   printf("Make sure Arduino is started\n");
   assert(phys_i2c_ping(TEST_PHYS_ADDR) == true);
+  assert(phys_i2c_ping(BAD_PHYS_ADDR) == false);
   phys_i2c_write_led(TEST_PHYS_ADDR, 1);
   sleep(1);
   phys_i2c_write_led(TEST_PHYS_ADDR, 0);
