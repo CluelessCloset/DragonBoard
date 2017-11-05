@@ -7,13 +7,13 @@
 //Constantly poll the network interface for new jobs from the server
 void * net_loop(void * x)
 {
-  HangerNet h = new HangerNet("http://cluelesscloset.tech/", "dickbutt@gmail.com");
+  HangerNet h("http://cluelesscloset.tech/", "dickbutt@gmail.com");
   
   while(running)
   {
     packet p = h.pollServer();
 
-    if(h.lastPacketValid())
+    if(h.isPacketValid())
     {
       push_job(&p);
       //respond with some kind of status?
@@ -26,9 +26,9 @@ void * net_loop(void * x)
   return (void *) 0;
 }
 
-//Hanger_Net implementation
 HangerNet::HangerNet(std::string statUrl, std::string authEmail);
 {
+  running = true;
   status_url = statUrl;
   email = authEmail;
   curl = curl_easy_init();
@@ -97,10 +97,11 @@ std::string response HangerNet::curl_get_string(std::string url, std::string aut
 
 packet HangerNet::pollServer()
 {
+  lastPacketValid = false;
+
   std:string response = curl_get_string(status_url, email, 500);
   if(response.empty())
   {
-    lastPacketValid = false
     packet p;
     return packet;
   }

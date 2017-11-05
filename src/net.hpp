@@ -27,11 +27,21 @@ packet pull_job();
 class HangerNet
 {
 public:
+  //Hanger_Net implementation
   HangerNet(std::string statUrl, std::string authEmail);
+  {
+    running = true;
+    status_url = statUrl;
+    email = authEmail;
+    curl = curl_easy_init();
+  }
   ~HangerNet();
 
   packet pollServer();
-  bool packetValid();
+  bool isPacketValid();
+
+  //thread is running
+  bool running;
 private:
 
   //use curl to retrieve some info
@@ -42,14 +52,14 @@ private:
   //state variables
   //last packet valid
   bool lastPacketValid;
-  //thread is running
-  bool running;
+
+  
   //CURL * for the interface
   CURL* curl;
   //url to get status messages from
   std::string status_url; 
   std::string email;
-}
+};
 
 
 
