@@ -90,7 +90,7 @@ void *exec_job_lit(void * data)
   if(youThereBro == true)
   {
     phys_i2c_write_led((uint8_t)*num, HIGH);
-    uint16_t r; 
+    uint16_t r = 0; 
     while(r < ADC_THRESH)
     {
       printf("Polling the sensor %d\n", r);
