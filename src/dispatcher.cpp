@@ -94,7 +94,7 @@ void *exec_job_lit(void * data)
     while(r < ADC_THRESH)
     {
       printf("Polling the sensor %d\n", r);
-      phys_i2c_read_force((uint8_t) *num);
+      r = phys_i2c_read_force((uint8_t) *num);
       usleep(10*1000);
     }
 
