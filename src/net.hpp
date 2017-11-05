@@ -29,12 +29,6 @@ class HangerNet
 public:
   //Hanger_Net implementation
   HangerNet(std::string statUrl, std::string authEmail);
-  {
-    running = true;
-    status_url = statUrl;
-    email = authEmail;
-    curl = curl_easy_init();
-  }
   ~HangerNet();
 
   packet pollServer();
