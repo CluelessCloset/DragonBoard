@@ -89,7 +89,7 @@ void test_net()
 {
   std::string addr = "http://cluelesscloset.tech/";
   std::string email = "d@d.com";
-  printf("Super dependant on what the server you're trying to ping is going\n");
+  printf("Sending curl to serverwith %s and %s \n", addr.c_str(), email.c_str());
   HangerNet h(addr, email);
   packet p = h.pollServer();
 
