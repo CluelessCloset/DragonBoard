@@ -16,7 +16,7 @@ int main()
 #else
   dispatcher_init();
   phys_init();
-  phys_i2c_write_led(LOW);
+  phys_i2c_write_led(8, LOW); //for debug until i get sig-handling
 
   //red light means its on
   phys_write_led(HIGH);
