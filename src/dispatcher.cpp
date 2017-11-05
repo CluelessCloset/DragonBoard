@@ -82,7 +82,7 @@ packet pull_job()
 //Actually exec commands from the server
 //Ping hanger: num
 //if its there, ping it, and if it has a shirt on it, light it up.
-void exec_job_lit(int num)
+void exec_job_lit(int num, int val)
 {
   bool youThereBro = phys_i2c_ping((uint8_t) num);
   if(youThereBro = true)
@@ -90,12 +90,8 @@ void exec_job_lit(int num)
     uint16_t r = phys_i2c_read_force((uint8_t) num);
     if(r >= ADC_THRESH)
     {
-      phys_i2c_write_led((uint8_t)num, HIGH);
+      phys_i2c_write_led((uint8_t)num, val);
     } 
-    else 
-    {
-      phys_i2c_write_led((uint8_t)num, LOW);
-    }
   }
   else
   {

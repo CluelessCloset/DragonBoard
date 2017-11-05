@@ -21,7 +21,7 @@
 #define ERR             0xAA
 
 //ADC constants
-#define ADC_THRESH      30 
+#define ADC_THRESH      0 //30 is a good value. Using 0 because the sensor is buns
 void phys_init();
 
 void phys_write_led(int value);
