@@ -61,10 +61,10 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         curl_easy_setopt(curl, CURLOPT_EXPECT_100_TIMEOUT_MS, timeout_ms);
         
         std::string response_string;
-        //std::string header_string; //ignore
+        std::string header_string; //ignore
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunction);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
-        //curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string); //ignore
+        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string); //ignore
         
         //get response for debugging
         char* url;
@@ -81,6 +81,7 @@ std::string HangerNet::curl_get_string(std::string url, std::string authEmail, i
         printf("HTTP response: %d\n", response_code);
         printf("time elapsed: %d\n", elapsed);
         printf("Url visited: %s\n", url);
+        printf("Header string %s\n", header_string);
         printf("Response string: %s\n", response_string);
         return response_string;
     } else {
