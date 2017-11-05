@@ -84,7 +84,7 @@ packet pull_job()
 //if its there, ping it, and if it has a shirt on it, light it up.
 void *exec_job_lit(void * data)
 {
-  int* num = (int *)data;
+  int num = *(int *)data;
   printf("Time to get lit on hanger %d\n", *num);
   bool youThereBro = phys_i2c_ping((uint8_t) *num);
   if(youThereBro == true)
