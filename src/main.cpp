@@ -21,6 +21,8 @@ int main()
   pthread_create(&d_thread, NULL, dispatcher_loop, (void *) 0);
   pthread_create(&n_thread, NULL, net_loop, (void *) 0);
 
+  pthread_join(d_thread, NULL);
+  pthread_join(n_thread, NULL);
 #endif 
   return 0;
 }
